@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
     })
         }
     }
-    xhr_list.open('get','http://localhost:1888/wanbiaowang/api/list.php',true);
+    xhr_list.open('get','http://localhost:1888/wanbiaowang/wanbiaowang/api/list.php',true);
     xhr_list.send(null);
 
 

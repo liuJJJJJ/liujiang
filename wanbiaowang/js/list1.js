@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     goods_list.innerHTML +=`
                     <li>
                         <a href="detail.html" class="s_goods_img" target="_blank">
-                            <img src="${goods[i].url}">
+                              <img src="${goods[i].url}">
                         </a>
                         <div class="goods_txt">
                             <p class="tPrc">

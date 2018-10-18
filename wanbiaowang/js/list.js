@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded',function(){
                 function biao(goods){
 
                     swiper_wrapper.innerHTML +=`
-                    <div class="swiper-slide">
-                        <a href="html/detail.html" class="slider_a" target="_blank">
+                    <div class="swiper-slide" data-guid="${goods[i].id}">
+                        <a href="html/detail.html?id=${goods[i].id}" class="slider_a" target="_blank">
                             <p class="s_img">
                                 <img src="${goods[i].url}">
                             </p>

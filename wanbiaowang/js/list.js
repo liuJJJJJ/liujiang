@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded',function(){
                                 <del>￥${goods[i].oldprice}</del>
                             </div>
                         </a>
-                    </div>`
-                         
+                    </div>`         
                 }
             }
             var mySwiper2 = new Swiper('#swiper2',{

@@ -1,114 +1,96 @@
-document.addEventListener("DOMContentLoaded", function(){
-    var buybox=document.querySelector('.mbshop_cart_1127_single_warp_box');
-    var go_to_balance_left_alg=document.querySelector('.go_to_balance_left_alg');
-    var go_to_balance_left_total=document.querySelector('.go_to_balance_left_total');
-    var xunhuan=document.querySelector('.xunhuan');
+document.addEventListener('DOMContentLoaded',function(){
+    var goods_img = document.querySelector('.goods_img');
+    var goods_a = document.querySelector('.goods_a');
+    var price = document.querySelector('.goods_right ul');
+    var W_store_floor = document.querySelector('.W_store_floor');
+    var settle_price = document.querySelector('.settle_price');
+    var choose_num = document.querySelector('.choose_num');
+    var total = 0;
+    var nums = 0;
+
     var goodslist = Cookie.getCookie("goodslist") || [];
-        if(typeof goodslist == "string"){
+        if(typeof goodslist == 'string'){
             goodslist = JSON.parse(goodslist);
             for(var i=0;i<goodslist.length;i++){
                 var good = JSON.parse(goodslist[i]);
                 var qty=Cookie.getCookie("qty");
                 var qtys = JSON.parse(qty);
-
-                console.log(qtys)
-                buybox.innerHTML+=`
-                    <ul list-tag="list" id="756617bb-62f8-430c-a896-f5d854835814" name="4530" storeid="HQ01S116" class="mbshop_cart_1127_single_goods ">  
-                    <li class="mbshop_cart_1127_single_01">      
-                        <p>       
-                            <label class="mbshop_checkbox mbshop_cart_allSelect_list">        
-                                <input type="checkbox" name="status" class="mbshop_cart_1127_single_goods_checkbox" checked="true">            
-                                <i class="iconfont icon-dagou" style="color:red;box-sizing: border-box;border:1px solid red;"></i>               
-                            </label>      
-                        </p>     
-                    </li>     
-                     
-                    <li class="mbshop_cart_1127_single_02">      
-                        <dl>       
-                            <dt><a href="#"><img src="${good.url}" ></a></dt>       
-                            <dd>        
-                                <a href="#">
-                                    <p title="${good.names}">
-                                    【${good.banner_name}】${good.names}
-                                    </p>
-                                </a>        
-                                <i>商品编号：${good.id}</i>         
-                                <div class="mbshop_cart_1127_b">   
-                                    <b class="icon_grey">
-                                    <i class="iconfont"> <img style="float:left" src="../images/14tui.png"></i>该商品支持14天退换货</b>  
-                                </div> 
-                            </dd>      
-                        </dl>     
-                    </li>     
-                       
-                    <li class="mbshop_cart_1127_single_03">      
-                        <p>颜色：亮白</p>      
-                        <p>尺码：M:170/92A</p>     
-                    </li>     
-                     
-                    <li class="mbshop_cart_1127_single_04">      
-                        <i>￥${good.yuanjia}</i>      
-                        <em>￥${good.jiage}</em>              
-                        <ul id="main_box">          
-                            <li class="select_box">            
-                                <div>修改优惠</div>                
-                                <ul class="son_ul" style="display: none;">
-                                    <li version="1" value="满1件总价7.0折" title="满1件总价7.0折" class="mbshop_cart_1127_single_06_chose">
-                                        <label class="mbshop_radio">               
-                                            <input value="${qtys}" checked="" type="radio">                             
-                                            <i class="iconfont iconfontselect"></i>                              
-                                            <b>满1件总价7.0折</b>             
-                                        </label>                 
-                                    </li>                                 
-                                    <li version="-1" value="不使用活动优惠" title="不使用活动优惠" class="mbshop_cart_1127_single_06_chose">
-                                        <label class="mbshop_radio">               
-                                            <input type="radio">                              
-                                            <i class="iconfont"></i>                              
-                                            <b>不使用活动优惠</b>             
-                                        </label>                 
-                                    </li>                                             
-                                </ul>           
-                            </li>       
-                        </ul>            
-                    </li>     
-                       
-                    <li class="mbshop_cart_1127_single_05">            
-                        <span name="num-edit-cut" class="mbshop_cart_1127_single_label_left">-</span>      
-                        <input type="text" value="${qtys}" name="numEdit" class="mbshop_cart_1127_single_goods_num">     
-                        <span name="num-edit-add" class="mbshop_cart_1127_single_label_right">+</span>      
-                        <p>                                             </p>     
-                    </li>     
-                    
-                        
-                    <li class="mbshop_cart_1127_single_07">￥${good.jiage}</li>     
-                       
-                    <li class="mbshop_cart_1127_single_09">      
-                        <a href="#" class="in_favorites" name="661532">移入收藏夹</a>      
-                        <a href="#" class="delete_goods">删除</a>     
-                    </li>    
-                </ul>
-                `;
-                go_to_balance_left_alg.innerHTML+=`
-                    商品总价<i>￥${good.jiage}</i> - 优惠<em>￥0</em>
-                `;
-                go_to_balance_left_total.innerHTML+=`
-                    合计(不含运费)：<i>￥${good.jiage*qtys}</i>
-                `;
-                xunhuan.innerHTML+=`
-                 <li class="mbshop_cartListPdCon">
                 
-                    <a href="../html/detail.html?id=${good.id}">
-                    <img id="mainPic661532" src="${good.url}">
-                    </a>
-                    <p class="mbshop_cartListPdText">${good.names}</p>
-                    <p class="mbshop_cartListPdText">
-                        <b>￥${good.jiage}</b>
-                        <i>￥${good.yuanjia}</i>
-                        <a href="javascript:void(0);" class="veo_to_shop mbshop_cartAddItem" quickaddcartid="661532">加入购物袋</a>
-                </p>
-            </li>
-                
-                `
+                nums += qtys;
+                total += good.price * qtys;
+                     
+                W_store_floor.innerHTML +=`
+                    <div class="store_top clearfix">
+                        <span class="select_tik fl">
+                            <i class="icon-a-c-check01-1"></i>
+                            <i class="icon-a-c-check01-2"></i>
+                        </span>
+                        <a href="javascript:void(0);" class="store_name fl">法国赫柏林官方旗舰店</a>
+                    </div>
+                    <div class="goods_floor clearfix" data-goods-code="64487" data-cart-id="410422">
+                        <div class="goods_info fl clearfix">
+                            <div class="goods_right clearfix">
+                                <span class="select_tik">
+                                    <i class="icon-a-c-check01-1"></i>
+                                    <i class="icon-a-c-check01-2"></i>
+                                </span> 
+                                <a href="/goods/64487" target="_blank">
+                                    <div class="goods_img fl"> 
+                                        <img src="../${good.url}">
+                                    </div>
+                                    <div class="goods_txt fl">
+                                        <div class="goods_a">
+                                            <p class="p1">${good.name}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="fr">
+                                    <li class="unit_price"> ¥<em>${good.price}</em></li>
+                                    <li class="goods_num"> 
+                                        <span class="reduce calc-btns">-</span> 
+                                        <input type="text" class="num" value="${qtys}" data-stock="1" readonly=""> 
+                                        <span class="add calc-btns">+</span>
+                                    </li>
+                                    <li class="total_price">¥<em class="subTotal">${good.price*qtys}</em></li>
+                                    <li class="others"> 
+                                        <a href="javascript:void(0);" class="delete_goods">删除</a> 
+                                        <a href="javascript:void(0);" class="to_collection">移入收藏</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `     
             }
+            choose_num.innerHTML =
+            `已选商品<em id="selectedQuantity">${nums}</em>件`
+            settle_price.innerHTML =`
+                        <p class="p1">合计<span>¥<i id="payableAmount">${total}</i></span></p>
+                        <p class="p2">总额&nbsp;¥<em id="goodsAmount">${total}</em><span class="h">活动优惠¥<i id="totalDiscount">0</i></span></p>
+                `
         }
+
+    var buyNum = document.querySelector('.num');
+    var lessBtn = document.querySelector('.reduce');
+    var addBtn = document.querySelector('.add');
+    var buynum=buyNum.value;
+    addBtn.onclick=function(){
+        if(buynum>=9){
+            alert("购买数量最高为9")
+            return;
+        }else{
+            ++buynum;
+            buyNum.value=buynum;
+        }
+        
+    }
+    lessBtn.onclick=function(){
+        if(buynum<=1){
+            alert("购买数量最低为1")
+            return;
+        }else{
+            buynum--;
+            buyNum.value=buynum;
+        } 
+    }
 })
